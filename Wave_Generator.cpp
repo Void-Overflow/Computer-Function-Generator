@@ -2,15 +2,6 @@
 #include <cmath>
 #include <iostream>
 
-float mod(float a, float b) {
-	return a - (long long)(a / b) * b;
-}
-
-float pingpong(float x, float period) {
-	auto a = mod(x, period);
-	return (a < period / 2 ? a : period - a);
-}
-
 void Wave_Generator::Generate_Wave() {
 	const unsigned SAMPLES = 44100;
 
@@ -30,23 +21,23 @@ void Wave_Generator::Generate_Wave() {
 	else if (wave == 1) {
 		for (unsigned i = 0; i < SAMPLES; i++) {
 			raw[i] = AMPLITUDE * (sin(x * TWO_PI) < 0 ? -1 : 1);
-			x += 5 * increment;
+			x += increment;
+		}
+	}
+	//Triangle
+	else if (wave == 2) {
+		for (unsigned i = 0; i < SAMPLES ; i++) {
+			raw[i] = ((AMPLITUDE * sin(x * TWO_PI)) >= 0) ? AMPLITUDE : -AMPLITUDE;
+			x += increment;
 		}
 	}
 	//Noise
-	else  if (wave == 2) {
+	else  if (wave == 3) {
 		for (unsigned i = 0; i < SAMPLES; i++) {
 			raw[i] = 100000000 * sin(x * TWO_PI);
 			x += 100000000 * increment;
 		}
 	} 
-	//Triangle
-	else if (wave == 3) {
-		for (unsigned i = 0; i < SAMPLES ; i++) {
-			raw[i] = AMPLITUDE * (2 / 3.14159 * pingpong(x, TWO_PI) - 1);
-			x += 40 * increment;
-		}
-	}
 
 	if (!Buffer.loadFromSamples(raw, SAMPLES, 1, SAMPLE_RATE)) {
 		std::cout << "Loading Failed!\n";

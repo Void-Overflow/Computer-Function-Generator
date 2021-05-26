@@ -13,7 +13,7 @@ private:
 	sf::Sound Sound;
 public:
 	const unsigned SAMPLE_RATE = 44100;
-	unsigned AMPLITUDE = 30000;
+	signed AMPLITUDE = 30000;
 	unsigned int wave = 0;
 	double increment = 500. / SAMPLE_RATE;
 
