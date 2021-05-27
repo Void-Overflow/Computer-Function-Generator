@@ -49,6 +49,13 @@ std::string Command_Handler::start_session() {
 		if (in == "clear") {
 			system("CLS");
 
+			obj.status = currently_connected;
+			obj.amplitude = AMPLITUDE;
+			obj.frequency = (int)(increment * SAMPLE_RATE);
+			obj.wave = wave;
+
+			obj.return_format();
+
 			SetConsoleTextAttribute(std_output, 3);
 			std::cout << "> ";
 			SetConsoleTextAttribute(std_output, 7);
@@ -166,15 +173,15 @@ std::string Command_Handler::start_session() {
 			SetConsoleTextAttribute(std_output, FOREGROUND_RED);
 			std::cout << "-amplitude -input |";
 			SetConsoleTextAttribute(std_output, 3);
-			std::cout << " sets amplitude for wave off - input.Max is 30000.\n";
+			std::cout << " sets amplitude for wave off - input. Max is 30000.\n";
 			SetConsoleTextAttribute(std_output, FOREGROUND_RED);
 			std::cout << "-frequency -input |";
 			SetConsoleTextAttribute(std_output, 3);
-			std::cout << " sets frequency for wave off - input.Max is 20khz.\n";
+			std::cout << " sets frequency for wave off - input. Max is 20khz.\n";
 			SetConsoleTextAttribute(std_output, FOREGROUND_RED);
 			std::cout << "-wave -index |";
 			SetConsoleTextAttribute(std_output, 3);
-			std::cout << " chooses type of wave off - index.Max index is 3.\n\n";
+			std::cout << " chooses type of wave off - index. Range is from 0-3.\n\n";
 			SetConsoleTextAttribute(std_output, FOREGROUND_RED);
 			std::cout << "-clear |";
 			SetConsoleTextAttribute(std_output, 3);

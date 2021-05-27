@@ -2,7 +2,6 @@
 #define COMMAND_HANDLER_H
 
 #include <string>
-#include "Config_Display.h"
 #include "Wave_Generator.h"
 
 class Command_Handler : public Wave_Generator{

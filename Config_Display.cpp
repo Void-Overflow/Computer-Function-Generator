@@ -13,7 +13,7 @@ std::string Config_Display::return_status() {
 }
 
 std::string Config_Display::return_amplitude() {
-	return " Amp: " + std::to_string(amplitude) + ";";
+	return " Amp. " + std::to_string(amplitude) + ";";
 }
 
 std::string Config_Display::return_frequency() {
@@ -57,7 +57,11 @@ std::string Config_Display::return_format() {
 	SetConsoleTextAttribute(std_output, 13);
 	std::cout << "Configuration - \n ";
 
-	SetConsoleTextAttribute(std_output, FOREGROUND_GREEN);
+	if(status == true)
+		SetConsoleTextAttribute(std_output, FOREGROUND_GREEN);
+	else
+		SetConsoleTextAttribute(std_output, FOREGROUND_RED);
+
 	std::cout << status_value;
 
 	SetConsoleTextAttribute(std_output, 9);
